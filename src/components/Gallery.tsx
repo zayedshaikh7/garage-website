@@ -5,11 +5,11 @@ export default function Gallery() {
       alt: 'Expert mechanic team',
     },
     {
-      url: '/whatsapp_image_2025-12-22_at_14.16.35_ffa858ba.jpg',
+      url: '/photo3.jpg',
       alt: 'Service bay with multiple vehicles',
     },
      {
-      url: '/whatsapp_image_2025-12-22_at_14.16.36_be314a67.jpg',
+      url: '/photo4.jpg',
       alt: 'Expert mechanic team',
     },
     
@@ -18,13 +18,13 @@ export default function Gallery() {
       alt: 'Expert mechanic team',
     },
     {
-      url: '/whatsapp_image_2025-12-22_at_14.16.36_b2952ebf.jpg',
+      url: '/photo.jpg',
       alt: 'Modern garage facility',
     },
-   {
-      url: '/photo3.jpg',
-      alt: 'Expert mechanic team',
-    },
+  //  {
+  //     url: '/photo3.jpg',
+  //     alt: 'Expert mechanic team',
+  //   },
     
   ];
 
