@@ -13,9 +13,9 @@ export default function Hero() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl">
-          <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest text-blue-400 uppercase bg-blue-400/10 rounded-full border border-blue-400/20">
+          {/* <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest text-blue-400 uppercase bg-blue-400/10 rounded-full border border-blue-400/20">
             UNITEDAUTO garage
-          </span>
+          </span> */}
           <h1 className="text-6xl md:text-8xl font-black text-white mb-6 leading-tight">
             Premium Care, <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
