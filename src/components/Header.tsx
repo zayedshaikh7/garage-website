@@ -14,7 +14,6 @@ export default function Header() {
   const navLinks = [
     { name: 'About', id: 'about' },
     { name: 'Services', id: 'services' },
-    
     { name: 'Gallery', id: 'gallery' },
   ];
 
@@ -33,8 +32,8 @@ export default function Header() {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'
+    <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+      isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'
     }`}>
       <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between">
@@ -72,24 +71,36 @@ export default function Header() {
             </button>
           </div>
 
-          <button className="md:hidden p-2 rounded-lg bg-gray-100" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {/* MOBILE MENU BUTTON - FIXED COLORS */}
+          <button 
+            className={`md:hidden p-2 rounded-lg transition-colors ${
+              isScrolled ? 'bg-gray-100 text-gray-900' : 'bg-white/10 text-white border border-white/20'
+            }`} 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             {isMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 p-6 shadow-xl md:hidden animate-in slide-in-from-top duration-300">
+          <div className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 p-6 shadow-2xl md:hidden animate-in slide-in-from-top duration-300">
             <div className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="flex items-center justify-between text-left text-gray-800 font-semibold py-2 border-b border-gray-50"
+                  className="flex items-center justify-between text-left text-gray-800 font-bold py-3 border-b border-gray-50"
                 >
                   {link.name} <ChevronRight className="w-4 h-4 text-blue-600" />
                 </button>
               ))}
+              <button 
+                onClick={() => scrollToSection('get-in-touch')}
+                className="bg-blue-600 text-white py-4 rounded-xl font-bold text-center"
+              >
+                Book Appointment
+              </button>
             </div>
           </div>
         )}
