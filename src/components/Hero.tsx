@@ -1,41 +1,31 @@
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden bg-gray-900 pt-24 md:pt-0">
-      {/* Background Image with Gradient Overlay */}
-      <div className="absolute inset-0 z-0">
+    <section id="hero" className="relative min-h-[85vh] flex items-center bg-black overflow-hidden">
+      <div className="absolute inset-0">
         <img 
           src="https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg" 
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-50"
           alt="Garage"
+          loading="eager" 
+          // @ts-ignore - This tells TypeScript to ignore the warning
+          fetchPriority="high" 
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-3xl">
-          <h1 className="text-5xl md:text-8xl font-black text-white mb-6 leading-tight">
-            Premium Care, <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
-              Fair Prices.
-            </span>
+        <div className="max-w-2xl">
+          <p className="text-[#FFC107] font-bold uppercase tracking-widest mb-3">Quality Service</p>
+          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight uppercase italic mb-6">
+            Expert Auto Repair <br /> 
+            <span className="text-[#FFC107]">& Maintenance</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-xl leading-relaxed">
-            Experience dealership-level quality at 50% of the cost. From routine oil changes to complex engine diagnostics, we keep you moving.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button 
-              onClick={() => document.getElementById('get-in-touch')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl font-bold text-lg transition-all transform hover:scale-105 hover:shadow-[0_20px_50px_rgba(37,117,252,0.3)]"
-            >
-              Book Service Now
-            </button>
-            <button 
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-10 py-5 rounded-2xl font-bold text-lg transition-all text-center"
-            >
-              Our Services
-            </button>
-          </div>
+          <button 
+            onClick={() => document.getElementById('get-in-touch')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-[#FFC107] hover:bg-yellow-500 text-black px-8 py-4 font-black uppercase skew-x-[-10deg] transition-all"
+          >
+            <span className="inline-block skew-x-[10deg]">Book Appointment</span>
+          </button>
         </div>
       </div>
     </section>
