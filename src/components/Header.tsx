@@ -11,7 +11,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Corrected Helper function for smooth scrolling
+  // Helper function to handle scrolling and close mobile menu
   const scrollToSection = (id) => {
     setIsMenuOpen(false); 
     
@@ -34,7 +34,7 @@ export default function Header() {
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/95 shadow-xl' : 'bg-transparent'}`}>
       
-      {/* Top Info Bar - Data synced with business records */}
+      {/* Top Info Bar - Data synced with Sixth Gear records */}
       <div className="hidden lg:flex bg-[#FFC107] text-black py-2 px-6 justify-end gap-6 text-sm font-bold uppercase tracking-tighter">
         <div className="flex items-center gap-2">
           <Clock size={16}/> Mon-Sat: 10:00 AM - 7:00 PM
@@ -45,13 +45,16 @@ export default function Header() {
       </div>
 
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Brand Area */}
+        {/* Brand Area with Circular Logo */}
         <div 
           className="flex items-center gap-4 cursor-pointer" 
           onClick={() => scrollToSection('home')}
         >
-          {/* United Garage Branding */}
-          <img src="/logo.jpeg" alt="United Garage" className="h-12 w-auto md:h-16" />
+          <img 
+            src="/logo.jpeg" 
+            alt="United Garage" 
+            className="h-12 w-12 md:h-16 md:w-16 rounded-full object-cover border-2 border-[#FFC107]" 
+          />
           <span className="text-white hover:text-[#FFC107] font-bold uppercase text-sm tracking-widest transition-colors">
             United Auto
           </span>
@@ -76,7 +79,7 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Mobile Menu Toggle */}
         <button 
           className="md:hidden text-white" 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -85,7 +88,7 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div className="absolute top-full left-0 w-full bg-black/95 border-t border-white/10 flex flex-col p-6 gap-6 md:hidden">
           {['Home', 'Services', 'About', 'Gallery'].map((item) => (

@@ -1,4 +1,4 @@
-import { Shield, ChevronRight } from 'lucide-react';
+import { Shield, ChevronRight, Users, Car, Award, CheckCircle } from 'lucide-react';
 
 export default function Services() {
   const technicalRepairs = [
@@ -11,6 +11,13 @@ export default function Services() {
     { title: "Preventative Maintenance", img: "/service1.jpeg" },
     { title: "Brake & Service", img: "/service2.jpeg" },
     { title: "Engine Diagnostics", img: "/service3.jpeg" }
+  ];
+
+  const stats = [
+    { label: "Years of Experience", value: "30+", icon: <Award className="text-[#FFC107]" /> },
+    { label: "Vehicles Repaired", value: "5K+", icon: <Car className="text-[#FFC107]" /> },
+    { label: "Professionals & Businesses", value: "2K+", icon: <Users className="text-[#FFC107]" /> },
+    { label: "Satisfied Customers", value: "100%", icon: <CheckCircle className="text-[#FFC107]" /> }
   ];
 
   return (
@@ -30,10 +37,7 @@ export default function Services() {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform" 
                 alt={s.title}
                 loading="eager"
-                onError={(e) => {
-                  // This prevents the "Black Screen" if image fails
-                  e.currentTarget.className = "hidden";
-                }}
+                onError={(e) => { e.currentTarget.className = "hidden"; }}
               />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition-all duration-300" />
               <div className="absolute bottom-0 left-0 w-full p-6">
@@ -46,7 +50,7 @@ export default function Services() {
         </div>
 
         {/* Feature Section */}
-        <div className="bg-gray-900 rounded-[2.5rem] p-8 md:p-12 flex flex-col lg:flex-row gap-10 items-center">
+        <div className="bg-gray-900 rounded-[2.5rem] p-8 md:p-12 flex flex-col lg:flex-row gap-10 items-center mb-12">
           <div className="lg:w-1/2">
             <h3 className="text-3xl font-black text-[#FFC107] uppercase italic mb-4">Complete Repair Solutions</h3>
             <p className="text-gray-400 mb-6 font-medium leading-relaxed italic">
@@ -71,6 +75,32 @@ export default function Services() {
             >
               Book Now <ChevronRight size={16}/>
             </button>
+          </div>
+        </div>
+
+        {/* --- NEW STATISTICS SECTION --- */}
+        <div className="bg-gray-100 rounded-[2.5rem] p-8 md:p-12 border-2 border-gray-900/5">
+          <div className="max-w-3xl mb-12">
+            <h3 className="text-3xl font-black text-gray-900 uppercase italic mb-4">The Repair Statistics</h3>
+            <p className="text-gray-600 font-bold uppercase text-sm leading-relaxed">
+              Auto repair technical statistics you must know. Whether it's a routine inspection or major repair, we guarantee total satisfaction.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, i) => (
+              <div key={i} className="flex items-start gap-4 group">
+                <div className="text-5xl font-black text-gray-900 italic leading-none border-l-4 border-[#FFC107] pl-4">
+                  {stat.value}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-400 mb-1">{stat.icon}</span>
+                  <span className="text-xs font-black uppercase tracking-wider text-gray-600 leading-tight">
+                    {stat.label}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
