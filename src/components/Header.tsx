@@ -4,6 +4,11 @@ import { Menu, X, Clock, Phone } from 'lucide-react';
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const whatsappNumber = '918779405347';
+  const whatsappMessage = 'Hi! I would like to book an appointment for my car service.';
+  
+  // Construct the WhatsApp URL
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -11,22 +16,14 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Helper function to handle scrolling and close mobile menu
   const scrollToSection = (id) => {
     setIsMenuOpen(false); 
-    
     if (id === 'home') {
-      window.scrollTo({ 
-        top: 0, 
-        behavior: 'smooth' 
-      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   };
@@ -34,18 +31,16 @@ export default function Header() {
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/95 shadow-xl' : 'bg-transparent'}`}>
       
-      {/* Top Info Bar - Data synced with Sixth Gear records */}
       <div className="hidden lg:flex bg-[#FFC107] text-black py-2 px-6 justify-end gap-6 text-sm font-bold uppercase tracking-tighter">
         <div className="flex items-center gap-2">
           <Clock size={16}/> Mon-Sat: 10:00 AM - 7:00 PM
         </div>
         <div className="flex items-center gap-2">
-          <Phone size={16}/> +91 96198 59999
+          <Phone size={16}/> +91 97692 73583
         </div>
       </div>
 
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Brand Area with Circular Logo */}
         <div 
           className="flex items-center gap-4 cursor-pointer" 
           onClick={() => scrollToSection('home')}
@@ -71,12 +66,15 @@ export default function Header() {
               {item}
             </button>
           ))}
-          <button 
-            onClick={() => scrollToSection('get-in-touch')}
+          {/* Desktop WhatsApp Link */}
+          <a 
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-[#FFC107] hover:bg-yellow-500 text-black px-6 py-3 font-black uppercase skew-x-[-12deg] transition-all"
           >
             <span className="inline-block skew-x-[12deg]">Appointment</span>
-          </button>
+          </a>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -100,12 +98,16 @@ export default function Header() {
               {item}
             </button>
           ))}
-          <button 
-            onClick={() => scrollToSection('get-in-touch')}
+          {/* Mobile WhatsApp Link */}
+          <a 
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsMenuOpen(false)}
             className="bg-[#FFC107] text-black px-6 py-4 font-black uppercase text-center"
           >
             Book Appointment
-          </button>
+          </a>
         </div>
       )}
     </header>

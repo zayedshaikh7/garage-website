@@ -5,40 +5,33 @@ export default function About() {
     {
       icon: <Users className="w-8 h-8 text-[#FFC107]" />,
       title: 'Master Technicians',
-      description: 'Factory-trained specialists dedicated to precision repairs for luxury and domestic vehicles.',
+      description: 'Factory-trained specialists dedicated to precision repairs for German and premium vehicles, ensuring reliability and performance.',
     },
     {
       icon: <ShieldCheck className="w-8 h-8 text-[#FFC107]" />,
       title: 'Premium OEM Parts',
-      description: 'We use only high-grade, genuine components to ensure your vehicle’s longevity and safety.',
+      description: 'We use only high-grade, genuine components to ensure your vehicle’s longevity, safety, and optimal performance.',
     },
     {
       icon: <Zap className="w-8 h-8 text-[#FFC107]" />,
       title: 'Smart Diagnostics',
-      description: 'Utilizing the latest dealership-level technology to identify issues quickly and accurately.',
+      description: 'Utilizing the latest dealership-level diagnostic technology to identify issues quickly and accurately in German vehicles.',
     },
     {
       icon: <CheckCircle className="w-8 h-8 text-[#FFC107]" />,
       title: 'Integrity First',
-      description: 'Total transparency with detailed reports and upfront pricing—no hidden costs, ever.',
+      description: 'Total transparency with detailed service reports and upfront pricing—no hidden costs, ever.',
     },
     {
       icon: <DollarSign className="w-8 h-8 text-[#FFC107]" />,
       title: 'Unbeatable Value',
-      description: 'Experience elite dealership-quality service at a fraction of the traditional cost.',
+      description: 'Experience dealership-quality service without dealership-level costs, delivering exceptional value without compromise.',
     },
     {
       icon: <Wrench className="w-8 h-8 text-[#FFC107]" />,
       title: 'Full-Service Hub',
-      description: 'Your all-in-one destination for mechanical repairs, electrical tuning, and bodywork.',
+      description: 'Your all-in-one destination for mechanical repairs, electrical diagnostics, preventive maintenance, and bodywork.',
     },
-  ];
-
-  const partners = [
-    { name: "Bosch", url: "https://upload.wikimedia.org/wikipedia/commons/1/16/Bosch-logo.svg" },
-    { name: "Mobil1", url: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Mobil_1_logo.svg" },
-    { name: "Castrol", url: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Castrol_logo.svg" },
-    { name: "Snap-on", url: "https://upload.wikimedia.org/wikipedia/commons/b/b5/Snap-on_logo.svg" }
   ];
 
   return (
@@ -50,13 +43,19 @@ export default function About() {
             ABOUT UNITED <span className="text-[#FFC107]">AUTO GARAGE</span>
           </h2>
           <div className="h-2 w-24 bg-gray-900 mx-auto mb-8" />
-          <p className="text-xl text-gray-600 leading-relaxed font-medium italic">
-            <span className="text-black font-black">REDEFINING AUTOMOTIVE EXCELLENCE.</span> We combine decade-long expertise with advanced technology to deliver superior care for your vehicle.
-          </p>
+          <div className="space-y-4">
+            <p className="text-2xl text-black font-black uppercase italic tracking-tight">
+              REDEFINING AUTOMOTIVE EXCELLENCE.
+            </p>
+            <p className="text-xl text-gray-600 leading-relaxed font-medium italic">
+              We combine decades of expertise with advanced diagnostics to deliver 
+              <span className="text-black font-bold"> precision care for German and premium vehicles.</span>
+            </p>
+          </div>
         </div>
 
         {/* Styled Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <div
               key={index}
@@ -82,21 +81,11 @@ export default function About() {
           ))}
         </div>
 
-        {/* Realistic Brand Logo Section */}
-        {/* <div className="border-t border-gray-200 pt-16">
-          <p className="text-center text-xs font-black uppercase tracking-[0.3em] text-gray-400 mb-10">
-            Trusted by the world's leading brands & partners
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
-            {partners.map((partner, i) => (
-              <img 
-                key={i} 
-                src={partner.url} 
-                alt={partner.name} 
-                className="h-8 md:h-12 w-auto object-contain" 
-              />
-            ))}
-          </div>
+        {/* Brand Authority Footer
+        <div className="mt-20 text-center">
+            <p className="text-gray-600 font-black uppercase tracking-[0.4em] text-[10px] md:text-xs italic">
+                BMW <span className="text-[#FFC107] mx-2">•</span> Mercedes-Benz <span className="text-[#FFC107] mx-2">•</span> Audi <span className="text-[#FFC107] mx-2">•</span> Volkswagen
+            </p>
         </div> */}
       </div>
     </section>

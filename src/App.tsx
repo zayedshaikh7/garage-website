@@ -5,6 +5,7 @@ import Services from './components/Services';
 import Gallery from './components/Gallery';
 import GetInTouch from './components/GetInTouch';
 import Footer from './components/Footer';
+import Review from './components/Review';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <About />
       <Services />
       <Gallery />
+      <Review/>
       <GetInTouch />
       <Footer />
     </div>

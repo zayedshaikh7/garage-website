@@ -2,21 +2,27 @@ import { Shield, ChevronRight, Users, Car, Award, CheckCircle } from 'lucide-rea
 
 export default function Services() {
   const technicalRepairs = [
-    'General Auto Repair', 'Fuel System Repair', 'Transmission Replacement',
-    'Exhaust System', 'Cooling System', 'Electrical Diagnostics',
-    'Computer Testing', 'CV Axles & Suspension'
+    "Advanced German Vehicle Diagnostics",
+    "Engine & Transmission Repair",
+    "Brake, Suspension & Steering Systems",
+    "Electrical & ECU Programming",
+    "Cooling & Fuel System Services",
+    "Precision Preventive Maintenance"
   ];
 
   const coreServices = [
     { title: "Preventative Maintenance", img: "/service1.jpeg" },
     { title: "Brake & Service", img: "/service2.jpeg" },
-    { title: "Engine Diagnostics", img: "/service3.jpeg" }
+    { title: "Engine Diagnostics", img: "/service3.jpeg" },
+    { title: "German Car Diagnostics", img: "/img4.jpeg" },
+    { title: "Precision Repairs", img: "/img5.jpeg" },
+    { title: "Premium Servicing", img: "/img6.jpeg" }
   ];
 
   const stats = [
     { label: "Years of Experience", value: "30+", icon: <Award className="text-[#FFC107]" /> },
-    { label: "Vehicles Repaired", value: "5K+", icon: <Car className="text-[#FFC107]" /> },
-    { label: "Professionals & Businesses", value: "2K+", icon: <Users className="text-[#FFC107]" /> },
+    { label: "German Vehicles Serviced", value: "5K+", icon: <Car className="text-[#FFC107]" /> },
+    { label: "Trusted Customers", value: "2K+", icon: <Users className="text-[#FFC107]" /> },
     { label: "Satisfied Customers", value: "100%", icon: <CheckCircle className="text-[#FFC107]" /> }
   ];
 
@@ -29,20 +35,20 @@ export default function Services() {
         </div>
 
         {/* Top Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {coreServices.map((s, i) => (
             <div key={i} className="group relative h-72 overflow-hidden rounded-2xl bg-gray-200">
               <img 
                 src={s.img} 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform" 
                 alt={s.title}
-                loading="eager"
-                onError={(e) => { e.currentTarget.className = "hidden"; }}
+                loading="lazy"
+                onError={(e) => { e.currentTarget.src = "https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg"; }}
               />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition-all duration-300" />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300" />
               <div className="absolute bottom-0 left-0 w-full p-6">
-                <h3 className="bg-[#FFC107] inline-block px-4 py-2 text-sm font-black uppercase italic shadow-lg text-black">
-                  {s.title}
+                <h3 className="bg-[#FFC107] inline-block px-4 py-2 text-sm font-black uppercase italic shadow-lg text-black transform -skew-x-12">
+                  <span className="inline-block skew-x-12">{s.title}</span>
                 </h3>
               </div>
             </div>
@@ -52,9 +58,9 @@ export default function Services() {
         {/* Feature Section */}
         <div className="bg-gray-900 rounded-[2.5rem] p-8 md:p-12 flex flex-col lg:flex-row gap-10 items-center mb-12">
           <div className="lg:w-1/2">
-            <h3 className="text-3xl font-black text-[#FFC107] uppercase italic mb-4">Complete Repair Solutions</h3>
+            <h3 className="text-3xl font-black text-[#FFC107] uppercase italic mb-4">COMPLETE GERMAN CAR SOLUTIONS</h3>
             <p className="text-gray-400 mb-6 font-medium leading-relaxed italic">
-                Expert care for all major makes and models using genuine parts.
+                Expert servicing for BMW, Mercedes-Benz, Audi & Volkswagen using manufacturer-standard procedures.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {technicalRepairs.map((item, i) => (
@@ -67,23 +73,25 @@ export default function Services() {
           
           <div className="lg:w-1/2 bg-[#FFC107] p-8 rounded-3xl text-black">
             <Shield className="w-12 h-12 mb-4" />
-            <h4 className="text-2xl font-black uppercase italic">Safety Inspection</h4>
-            <p className="font-bold my-4 leading-snug uppercase text-sm">Our precision brake servicing ensures your family's safety on every journey.</p>
+            <h4 className="text-2xl font-black uppercase italic">SAFETY INSPECTION</h4>
+            <p className="font-bold my-4 leading-snug uppercase text-sm">
+              Comprehensive multi-point inspection for German vehicles, delivering dealer-level safety and reliability at significantly lower cost than authorized service centres.
+            </p>
             <button 
-              onClick={() => document.getElementById('get-in-touch')?.scrollIntoView({ behavior: 'smooth' })} 
+              onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })} 
               className="flex items-center gap-2 font-black uppercase text-sm border-b-2 border-black hover:translate-x-2 transition-all"
             >
-              Book Now <ChevronRight size={16}/>
+              BOOK INSPECTION <ChevronRight size={16}/>
             </button>
           </div>
         </div>
 
-        {/* --- NEW STATISTICS SECTION --- */}
-        <div className="bg-gray-100 rounded-[2.5rem] p-8 md:p-12 border-2 border-gray-900/5">
+        {/* Statistics Section */}
+        <div className="bg-gray-100 rounded-[2.5rem] p-8 md:p-12 border-2 border-gray-900/5 mb-12">
           <div className="max-w-3xl mb-12">
-            <h3 className="text-3xl font-black text-gray-900 uppercase italic mb-4">The Repair Statistics</h3>
+            <h3 className="text-3xl font-black text-gray-900 uppercase italic mb-4">OUR SERVICE RECORD</h3>
             <p className="text-gray-600 font-bold uppercase text-sm leading-relaxed">
-              Auto repair technical statistics you must know. Whether it's a routine inspection or major repair, we guarantee total satisfaction.
+              Key service insights that reflect our expertise. From routine inspections to complex German car repairs, we deliver precision, reliability, and complete customer satisfaction.
             </p>
           </div>
 
@@ -102,6 +110,13 @@ export default function Services() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* --- BRAND LINE --- */}
+        <div className="text-center pt-8 border-t border-gray-100">
+          <p className="text-gray-600 font-black uppercase tracking-[0.4em] text-[10px] md:text-xs italic">
+            BMW <span className="text-[#FFC107] mx-2">•</span> Mercedes-Benz <span className="text-[#FFC107] mx-2">•</span> Audi <span className="text-[#FFC107] mx-2">•</span> Volkswagen
+          </p>
         </div>
       </div>
     </section>
