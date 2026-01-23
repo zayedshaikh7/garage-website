@@ -20,3 +20,21 @@ html {
 .animate-fade-in {
   animation: fade-in 1s ease-out;
 }
+/* Prevent horizontal scrolling and white gap */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Ensure sections don't leak width */
+section {
+  width: 100%;
+  overflow-x: hidden;
+}

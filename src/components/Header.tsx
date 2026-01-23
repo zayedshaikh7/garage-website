@@ -7,7 +7,6 @@ export default function Header() {
   const whatsappNumber = '918779405347';
   const whatsappMessage = 'Hi! I would like to book an appointment for my car service.';
   
-  // Construct the WhatsApp URL
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   useEffect(() => {
@@ -29,8 +28,9 @@ export default function Header() {
   };
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/95 shadow-xl' : 'bg-transparent'}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled || isMenuOpen ? 'bg-black shadow-xl' : 'bg-transparent'}`}>
       
+      {/* Top Bar - Hidden on mobile for better spacing */}
       <div className="hidden lg:flex bg-[#FFC107] text-black py-2 px-6 justify-end gap-6 text-sm font-bold uppercase tracking-tighter">
         <div className="flex items-center gap-2">
           <Clock size={16}/> Mon-Sat: 10:00 AM - 7:00 PM
@@ -42,15 +42,15 @@ export default function Header() {
 
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
         <div 
-          className="flex items-center gap-4 cursor-pointer" 
+          className="flex items-center gap-3 md:gap-4 cursor-pointer" 
           onClick={() => scrollToSection('home')}
         >
           <img 
             src="/logo.jpeg" 
             alt="United Garage" 
-            className="h-12 w-12 md:h-16 md:w-16 rounded-full object-cover border-2 border-[#FFC107]" 
+            className="h-10 w-10 md:h-16 md:w-16 rounded-full object-cover border-2 border-[#FFC107]" 
           />
-          <span className="text-white hover:text-[#FFC107] font-bold uppercase text-sm tracking-widest transition-colors">
+          <span className="text-white hover:text-[#FFC107] font-bold uppercase text-xs md:text-sm tracking-widest transition-colors">
             United Auto
           </span>
         </div>
@@ -66,7 +66,6 @@ export default function Header() {
               {item}
             </button>
           ))}
-          {/* Desktop WhatsApp Link */}
           <a 
             href={whatsappUrl}
             target="_blank"
@@ -79,35 +78,38 @@ export default function Header() {
 
         {/* Mobile Menu Toggle */}
         <button 
-          className="md:hidden text-white" 
+          className="md:hidden text-white p-2" 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Full screen height fixed */}
       {isMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-black/95 border-t border-white/10 flex flex-col p-6 gap-6 md:hidden">
+        <div className="fixed top-[72px] left-0 w-full h-[calc(100vh-72px)] bg-black flex flex-col p-8 gap-6 md:hidden z-[100] border-t border-white/10 overflow-y-auto">
           {['Home', 'Services', 'About', 'Gallery'].map((item) => (
             <button 
               key={item}
               onClick={() => scrollToSection(item.toLowerCase())}
-              className="text-white text-left font-bold uppercase text-lg tracking-widest"
+              className="text-white text-left font-black uppercase text-2xl italic tracking-widest border-b border-white/5 pb-4"
             >
               {item}
             </button>
           ))}
-          {/* Mobile WhatsApp Link */}
           <a 
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMenuOpen(false)}
-            className="bg-[#FFC107] text-black px-6 py-4 font-black uppercase text-center"
+            className="bg-[#FFC107] text-black px-6 py-5 font-black uppercase text-center text-lg mt-4 shadow-lg"
           >
             Book Appointment
           </a>
+          <div className="mt-auto text-center space-y-4 pb-10">
+            <p className="text-[#FFC107] font-bold text-sm tracking-widest">MON-SAT: 10AM - 7PM</p>
+            <p className="text-white font-bold text-lg">+91 97692 73583</p>
+          </div>
         </div>
       )}
     </header>
