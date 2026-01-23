@@ -37,7 +37,6 @@ export default function Reviews() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  // Auto-slide every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       nextStep();
@@ -57,9 +56,9 @@ export default function Reviews() {
 
   const variants = {
     enter: (direction) => ({
-      x: direction > 0 ? 200 : -200,
+      x: direction > 0 ? 100 : -100,
       opacity: 0,
-      scale: 0.9
+      scale: 0.95
     }),
     center: {
       zIndex: 1,
@@ -69,28 +68,29 @@ export default function Reviews() {
     },
     exit: (direction) => ({
       zIndex: 0,
-      x: direction < 0 ? 200 : -200,
+      x: direction < 0 ? 100 : -100,
       opacity: 0,
-      scale: 0.9
+      scale: 0.95
     })
   };
 
   return (
-    <section id="reviews" className="py-24 bg-neutral-950 overflow-hidden">
+    <section id="reviews" className="py-16 md:py-24 bg-neutral-950 overflow-hidden">
       <div className="container mx-auto px-6">
         
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-black text-white uppercase italic">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-6xl font-black text-white uppercase italic leading-tight">
             Client <span className="text-[#FFC107]">Feedback</span>
           </h2>
-          <div className="h-2 w-24 bg-[#FFC107] mx-auto mt-4" />
+          <div className="h-1.5 md:h-2 w-20 md:w-24 bg-[#FFC107] mx-auto mt-4" />
         </div>
 
-        <div className="max-w-4xl mx-auto relative px-12">
-          <Quote className="absolute -top-10 -left-2 text-white/5 w-32 h-32 rotate-12" />
+        <div className="max-w-4xl mx-auto relative px-4 md:px-12">
+          {/* Decorative Quote Icon - Scaled for mobile */}
+          <Quote className="absolute -top-6 md:-top-10 -left-2 text-white/5 w-16 h-16 md:w-32 md:h-32 rotate-12" />
           
-          <div className="relative h-[400px] md:h-[300px] flex items-center justify-center">
+          <div className="relative min-h-[420px] sm:min-h-[350px] md:h-[300px] flex items-center justify-center">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
                 key={index}
@@ -105,29 +105,31 @@ export default function Reviews() {
                 }}
                 className="absolute w-full"
               >
-                <div className="bg-neutral-900 border-2 border-white/5 rounded-[2rem] p-8 md:p-12 shadow-2xl">
+                <div className="bg-neutral-900 border-2 border-white/5 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-12 shadow-2xl">
                   {/* Stars */}
-                  <div className="flex gap-1 mb-6">
+                  <div className="flex gap-1 mb-4 md:mb-6">
                     {[...Array(reviews[index].rating)].map((_, i) => (
-                      <Star key={i} size={20} className="fill-[#FFC107] text-[#FFC107]" />
+                      <Star key={i} size={16} className="fill-[#FFC107] text-[#FFC107]" />
                     ))}
                   </div>
 
                   {/* Review Content */}
-                  <p className="text-xl md:text-2xl text-gray-200 italic font-medium leading-relaxed mb-8">
+                  <p className="text-lg md:text-2xl text-gray-200 italic font-medium leading-relaxed mb-6 md:mb-8">
                     "{reviews[index].content}"
                   </p>
 
                   {/* Reviewer Info */}
                   <div className="flex items-center justify-between border-t border-white/10 pt-6">
                     <div>
-                      <h4 className="text-white font-black uppercase italic tracking-wider text-lg">
+                      <h4 className="text-white font-black uppercase italic tracking-wider text-base md:text-lg">
                         {reviews[index].name}
                       </h4>
-                      <div className="flex items-center gap-2 text-[#FFC107] text-sm font-bold uppercase">
+                      <div className="flex flex-wrap items-center gap-2 text-[#FFC107] text-[10px] md:text-sm font-bold uppercase mt-1">
                         {reviews[index].role}
-                        <CheckCircle size={14} className="text-blue-400" />
-                        <span className="text-[10px] text-gray-500 tracking-tighter">Verified Owner</span>
+                        <div className="flex items-center gap-1">
+                          <CheckCircle size={12} className="text-blue-400" />
+                          <span className="text-[10px] text-gray-500 tracking-tighter normal-case">Verified Owner</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -136,23 +138,23 @@ export default function Reviews() {
             </AnimatePresence>
           </div>
 
-          {/* Manual Controls */}
+          {/* Manual Controls - Hidden on very small screens or made smaller */}
           <button 
             onClick={prevStep}
-            className="absolute left-0 top-1/2 -translate-y-1/2 text-white/20 hover:text-[#FFC107] transition-colors"
+            className="absolute -left-4 md:left-0 top-1/2 -translate-y-1/2 text-white/20 hover:text-[#FFC107] transition-colors z-10"
           >
-            <ChevronLeft size={48} />
+            <ChevronLeft className="w-8 h-8 md:w-12 md:h-12" />
           </button>
           <button 
             onClick={nextStep}
-            className="absolute right-0 top-1/2 -translate-y-1/2 text-white/20 hover:text-[#FFC107] transition-colors"
+            className="absolute -right-4 md:right-0 top-1/2 -translate-y-1/2 text-white/20 hover:text-[#FFC107] transition-colors z-10"
           >
-            <ChevronRight size={48} />
+            <ChevronRight className="w-8 h-8 md:w-12 md:h-12" />
           </button>
         </div>
 
         {/* Progress Dots */}
-        <div className="flex justify-center gap-3 mt-12">
+        <div className="flex justify-center gap-2 md:gap-3 mt-8 md:mt-12">
           {reviews.map((_, i) => (
             <button
               key={i}
@@ -161,7 +163,7 @@ export default function Reviews() {
                 setIndex(i);
               }}
               className={`h-1.5 transition-all duration-500 rounded-full ${
-                i === index ? 'w-12 bg-[#FFC107]' : 'w-6 bg-white/10'
+                i === index ? 'w-8 md:w-12 bg-[#FFC107]' : 'w-4 md:w-6 bg-white/10'
               }`}
             />
           ))}

@@ -38,41 +38,41 @@ export default function Gallery() {
   ];
 
   return (
-    <section id="gallery" className="py-24 bg-black">
+    <section id="gallery" className="py-16 md:py-24 bg-black overflow-hidden">
       <div className="container mx-auto px-6">
         
-        {/* Header Section with BIG Fonts */}
-        <div className="text-center mb-24">
+        {/* Header Section with BIG Fonts - Scaled for mobile */}
+        <div className="text-center mb-16 md:mb-24">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <LayoutGrid className="text-[#FFC107]" size={28} />
-            <p className="text-[#FFC107] font-black uppercase tracking-[0.4em] text-sm md:text-base">
+            <LayoutGrid className="text-[#FFC107]" size={24} />
+            <p className="text-[#FFC107] font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-xs md:text-base">
               GALLERY
             </p>
           </div>
-          <h2 className="text-5xl md:text-7xl font-black text-white uppercase italic leading-tight">
+          <h2 className="text-4xl md:text-7xl font-black text-white uppercase italic leading-tight">
             We handle <span className="text-[#FFC107]">premium cars</span> <br /> 
             professionally
           </h2>
-          <div className="h-2 w-32 bg-[#FFC107] mx-auto mt-8" />
+          <div className="h-1.5 md:h-2 w-24 md:w-32 bg-[#FFC107] mx-auto mt-6 md:mt-8" />
         </div>
 
-        {/* Dynamic Category Sections */}
-        <div className="space-y-32 max-w-7xl mx-auto">
+        {/* Dynamic Category Sections - Spacing adjusted for mobile */}
+        <div className="space-y-16 md:space-y-32 max-w-7xl mx-auto">
           {sections.map((section, sIndex) => (
-            <div key={sIndex} className="space-y-10">
+            <div key={sIndex} className="space-y-6 md:space-y-10">
               
               {/* Category Title */}
-              <div className="border-l-8 border-[#FFC107] pl-6">
-                <h3 className="text-3xl md:text-4xl font-black text-white uppercase italic mb-2">
+              <div className="border-l-4 md:border-l-8 border-[#FFC107] pl-4 md:pl-6">
+                <h3 className="text-2xl md:text-4xl font-black text-white uppercase italic mb-2">
                   {section.category}
                 </h3>
-                <p className="text-gray-400 text-base md:text-lg font-bold uppercase tracking-widest">
+                <p className="text-gray-400 text-xs md:text-lg font-bold uppercase tracking-widest">
                   {section.subtitle}
                 </p>
               </div>
 
-              {/* Image Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Image Grid - 1 col on mobile, 2 on tablet, 3 on desktop */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {section.images.map((image, iIndex) => (
                   <div
                     key={iIndex}
@@ -81,16 +81,15 @@ export default function Gallery() {
                     <img
                       src={image.url}
                       alt={image.alt}
-                      // Use loading="lazy" for better performance with many local images
                       loading="lazy"
-                      className="w-full h-full object-cover transition duration-700 transform group-hover:scale-105 opacity-70 group-hover:opacity-100"
+                      className="w-full h-full object-cover transition duration-700 transform group-hover:scale-105 opacity-80 md:opacity-70 group-hover:opacity-100"
                     />
                     
-                    {/* Hover Info Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                    {/* Info Overlay - Always visible on mobile for accessibility, hover on desktop */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 md:p-8">
                       <div className="flex items-center gap-2">
-                         <div className="w-8 h-[2px] bg-[#FFC107]" />
-                         <p className="text-[#FFC107] font-black uppercase italic text-base tracking-wider">
+                         <div className="w-6 md:w-8 h-[2px] bg-[#FFC107]" />
+                         <p className="text-[#FFC107] font-black uppercase italic text-sm md:text-base tracking-wider">
                            {image.alt}
                          </p>
                       </div>

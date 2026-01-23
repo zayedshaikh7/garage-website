@@ -21,7 +21,7 @@ export default function Hero() {
     <section 
       id="hero" 
       onClick={handleNextSlide}
-      className="relative min-h-[90vh] flex items-center bg-black overflow-hidden cursor-pointer select-none"
+      className="relative min-h-[80vh] md:min-h-[90vh] flex items-center bg-black overflow-hidden cursor-pointer select-none"
     >
       {/* BACKGROUND LAYER */}
       <AnimatePresence mode="popLayout">
@@ -43,16 +43,19 @@ export default function Hero() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 md:via-black/60 to-transparent z-10 pointer-events-none" />
 
-      {/* CONTENT LAYER - Fixed Overlap */}
-      <div className="container mx-auto px-6 relative z-20 pointer-events-none pt-20">
+      {/* CONTENT LAYER */}
+      <div className="container mx-auto px-6 relative z-20 pointer-events-none pt-12 md:pt-20">
         <div className="max-w-2xl">
-          <p className="text-[#FFC107] font-bold uppercase tracking-[0.3em] mb-4 text-xs md:text-sm">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-[#FFC107] font-black uppercase md:tracking-[0.3em] tracking-widest mb-3 text-[10px] md:text-sm"
+          >
             Premium Automotive Care
-          </p>
+          </motion.p>
           
-          {/* Changed from absolute/fixed height to relative/flex for mobile space */}
           <div className="relative">
             <AnimatePresence mode="wait">
               <motion.div
@@ -62,7 +65,7 @@ export default function Hero() {
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="text-4xl md:text-6xl font-black text-white leading-tight uppercase italic">
+                <h1 className="text-3xl md:text-6xl font-black text-white leading-tight uppercase italic drop-shadow-2xl">
                   {slides[currentSlide].title} <br />
                   <span className="text-[#FFC107]">{slides[currentSlide].highlight}</span>
                 </h1>
@@ -70,35 +73,35 @@ export default function Hero() {
             </AnimatePresence>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-8 md:mt-10">
             <a
               href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()} 
-              className="inline-block bg-[#FFC107] hover:bg-yellow-500 text-black px-8 py-4 md:px-10 md:py-4 font-black uppercase skew-x-[-10deg] transition-all pointer-events-auto shadow-lg"
+              className="inline-block bg-[#FFC107] hover:bg-yellow-500 text-black px-7 py-4 md:px-10 md:py-4 font-black uppercase skew-x-[-10deg] transition-all pointer-events-auto shadow-xl active:scale-95"
             >
-              <span className="inline-block skew-x-[10deg]">Book Appointment</span>
+              <span className="inline-block skew-x-[10deg] text-sm md:text-base">Book Appointment</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* SPECIALIZATION TEXT - Moved slightly for better mobile visibility */}
-      <div className="absolute bottom-12 left-6 z-30 pointer-events-none">
-        <p className="text-white text-xs md:text-base font-bold uppercase tracking-widest italic leading-tight">
+      {/* SPECIALIZATION TEXT */}
+      <div className="absolute bottom-10 md:bottom-12 left-6 z-30 pointer-events-none">
+        <p className="text-white text-[10px] md:text-base font-bold uppercase tracking-widest italic leading-tight">
           Specialize in <br />
-          <span className="text-[#FFC107] text-sm md:text-lg">German Cars</span>
+          <span className="text-[#FFC107] text-xs md:text-lg">German Cars</span>
         </p>
       </div>
 
       {/* PROGRESS INDICATORS */}
-      <div className="absolute bottom-12 right-6 flex items-center gap-2 z-30">
+      <div className="absolute bottom-10 md:bottom-12 right-6 flex items-center gap-1.5 md:gap-2 z-30">
         {slides.map((_, i) => (
           <div 
             key={i} 
             className={`h-[3px] transition-all duration-700 ${
-              i === currentSlide ? 'w-8 md:w-12 bg-[#FFC107]' : 'w-4 md:w-6 bg-white/20'
+              i === currentSlide ? 'w-8 md:w-12 bg-[#FFC107]' : 'w-3 md:w-6 bg-white/20'
             }`}
           />
         ))}
