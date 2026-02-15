@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Clock, Phone } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,10 +10,14 @@ export default function Header() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      if (!isMenuOpen) {
+        setIsScrolled(window.scrollY > 50);
+      }
+    };
     window.addEventListener('scroll', handleScroll);
     
-    // Body lock logic when mobile menu is open
+    // Background website scroll lock
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -26,124 +30,101 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (id) => {
     setIsMenuOpen(false); 
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.getElementById(id);
-      if (element) {
-        // Offset for the fixed header height
-        const offset = 80;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 100;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
   return (
-    <header className={`fixed w-full z-[100] transition-all duration-300 ${
-      isScrolled || isMenuOpen ? 'bg-black/90 backdrop-blur-md shadow-xl' : 'bg-transparent'
-    }`}>
-      
-      {/* Top Bar - Hidden on mobile for better spacing */}
-      <div className="hidden lg:flex bg-[#FFC107] text-black py-2 px-6 justify-end gap-6 text-sm font-bold uppercase tracking-tighter">
-        <div className="flex items-center gap-2">
-          <Clock size={16}/> Mon-Sat: 10:00 AM - 7:00 PM
-        </div>
-        <div className="flex items-center gap-2">
-          <Phone size={16}/> +91 97692 73583
-        </div>
-      </div>
+    <>
+      {/* Navigation Header */}
+      <header className={`fixed top-0 left-0 w-full z-[300] transition-all duration-300 ${
+        isScrolled || isMenuOpen ? 'bg-black shadow-xl' : 'bg-transparent'
+      }`}>
+        <nav className="container mx-auto px-5 py-4 flex justify-between items-center">
+          {/* Logo & Brand */}
+          <div className="flex items-center gap-4 cursor-pointer z-[310]" onClick={() => scrollToSection('home')}>
+            <img 
+              src="/logo.jpeg" 
+              alt="United Garage" 
+              className="h-14 w-14 md:h-20 md:w-20 rounded-full object-cover border-2 border-[#FFC107]" 
+            />
+            <div className="flex flex-col">
+              <span className="text-white font-black uppercase text-lg md:text-2xl leading-none">United Auto</span>
+              <span className="text-[#FFC107] font-bold uppercase text-[10px] md:text-xs tracking-widest leading-none mt-1">Garage & Care</span>
+            </div>
+          </div>
 
-      <nav className="container mx-auto px-5 py-3 md:py-4 flex justify-between items-center">
-        <div 
-          className="flex items-center gap-2 md:gap-4 cursor-pointer" 
-          onClick={() => scrollToSection('home')}
-        >
-          <img 
-            src="/logo.jpeg" 
-            alt="United Garage" 
-            className="h-10 w-10 md:h-16 md:w-16 rounded-full object-cover border-2 border-[#FFC107]" 
-          />
-          <span className="text-white hover:text-[#FFC107] font-black uppercase text-[10px] md:text-sm tracking-widest transition-colors leading-none">
-            United <br className="md:hidden" /> Auto
-          </span>
-        </div>
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-10">
+            {['Home', 'Services', 'About', 'Gallery'].map((item) => (
+              <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="text-white hover:text-[#FFC107] font-bold uppercase text-sm tracking-widest">
+                {item}
+              </button>
+            ))}
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="bg-[#FFC107] text-black px-6 py-3 font-black uppercase skew-x-[-12deg]">
+              <span className="inline-block skew-x-[12deg]">Appointment</span>
+            </a>
+          </div>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
+          {/* Bold Yellow X Button */}
+          <button className="md:hidden text-white p-2 z-[310]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={44} strokeWidth={3} className="text-[#FFC107]" /> : <Menu size={40} />}
+          </button>
+        </nav>
+      </header>
+
+      {/* MOBILE MENU OVERLAY - Now Scrollable */}
+      <div className={`fixed inset-0 bg-black z-[250] md:hidden transition-all duration-300 ease-in-out overflow-y-auto ${
+        isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+      }`}>
+        {/* Content Container with enough padding for scrolling */}
+        <div className="flex flex-col min-h-screen px-10 pt-32 pb-20 gap-8">
           {['Home', 'Services', 'About', 'Gallery'].map((item) => (
             <button 
-              key={item}
-              onClick={() => scrollToSection(item.toLowerCase())}
-              className="text-white hover:text-[#FFC107] font-bold uppercase text-sm tracking-widest transition-colors"
-            >
-              {item}
-            </button>
-          ))}
-          <a 
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#FFC107] hover:bg-yellow-500 text-black px-6 py-3 font-black uppercase skew-x-[-12deg] transition-all"
-          >
-            <span className="inline-block skew-x-[12deg]">Appointment</span>
-          </a>
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden text-white p-2 focus:outline-none" 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle Menu"
-        >
-          {isMenuOpen ? <X size={28} className="text-[#FFC107]" /> : <Menu size={28} />}
-        </button>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div className="fixed top-[64px] md:top-[72px] left-0 w-full h-[calc(100vh-64px)] bg-black/95 backdrop-blur-xl flex flex-col p-8 gap-6 md:hidden z-[100] border-t border-white/10 overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-300">
-          {['Home', 'Services', 'About', 'Gallery'].map((item) => (
-            <button 
-              key={item}
-              onClick={() => scrollToSection(item.toLowerCase())}
-              className="text-white text-left font-black uppercase text-3xl italic tracking-widest border-b border-white/5 pb-4 active:text-[#FFC107] transition-colors"
+              key={item} 
+              onClick={() => scrollToSection(item.toLowerCase())} 
+              className="text-white text-left font-black uppercase text-5xl italic tracking-tighter border-b border-white/10 pb-4 active:text-[#FFC107]"
             >
               {item}
             </button>
           ))}
           
           <a 
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setIsMenuOpen(false)}
-            className="bg-[#FFC107] text-black px-6 py-5 font-black uppercase text-center text-xl mt-4 shadow-[0_0_20px_rgba(255,193,7,0.3)]"
+            href={whatsappUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="bg-[#FFC107] text-black px-6 py-6 font-black uppercase text-center text-2xl mt-4"
           >
             Book Appointment
           </a>
 
-          <div className="mt-auto text-center space-y-4 pb-10">
-            <div className="flex flex-col gap-1">
-              <p className="text-[#FFC107] font-bold text-xs tracking-widest uppercase opacity-80">Working Hours</p>
-              <p className="text-white font-bold text-sm">MON-SAT: 10AM - 7PM</p>
+          {/* Contact Details */}
+          <div className="mt-10 space-y-6">
+            <div>
+              <p className="text-[#FFC107] font-bold text-xs tracking-widest uppercase">Working Hours</p>
+              <p className="text-white font-bold text-lg">MON-SAT: 10AM - 7PM</p>
             </div>
-            <div className="flex flex-col gap-1">
-              <p className="text-[#FFC107] font-bold text-xs tracking-widest uppercase opacity-80">Emergency Call</p>
-              <p className="text-white font-black text-2xl">+91 97692 73583</p>
+            
+            <div>
+              <p className="text-[#FFC107] font-bold text-xs tracking-widest uppercase">Emergency Call</p>
+              <p className="text-white font-black text-3xl italic">+91 97692 73583</p>
             </div>
           </div>
         </div>
-      )}
-    </header>
+      </div>
+    </>
   );
 }
